@@ -4,13 +4,12 @@ loop do
 	mob_no = gets
 
 	if /\A[1-9][0-9]{9}\Z/.match?(mob_no)
-		puts "You have entered a valid mobile number."
+		print "You have entered a valid mobile number.\n"
 	else
-		puts "You have entered an invalid mobile number."
+		print "You have entered an invalid mobile number.\n"
 	end
 
-	puts	
-	puts "Press y to enter again, any other key to go ahead!"
+	print "Press y to enter again, any other key to go ahead!\n"
 	ch = gets.chomp.upcase
 	break if ch!="Y"
 end
@@ -22,13 +21,12 @@ loop do
 	email = gets
 
 	if  /\A[a-z0-9]+[._]*[a-z0-9]*[@][a-z]+[.][a-z]+[.a-z]*\Z/.match?(email)
-		puts "You have entered a valid email address."
+		print "You have entered a valid email address.\n"
 	else
-		puts "You have entered an invalid email address."
+		print "You have entered an invalid email address.\n"
 	end
 
-	puts
-	puts "Press y to enter again, any other key to go ahead!"
+	print "Press y to enter again, any other key to go ahead!\n"
 		ch = gets.chomp.upcase
 		break if ch!="Y"
 end
@@ -39,13 +37,12 @@ loop do
 	name = gets
 
 	if  /\A[a-zA-Z]+\s[a-zA-Z]+\Z/.match?(name)
-		puts "You have entered a valid name."
+		print "You have entered a valid name.\n"
 	else
-		puts "You have entered an invalid name."
+		print "You have entered an invalid name.\n"
 	end
 
-	puts
-	puts "Press y to enter again, any other key to go ahead!"
+	print "Press y to enter again, any other key to go ahead!\n"
 	ch = gets.chomp.upcase
 	break if ch!="Y"
 end
@@ -57,13 +54,12 @@ loop do
 	gender = gets
 
 	if /\A[MFmf]\Z/.match?(gender)
-		puts "You have entered a valid gender."
+		print "You have entered a valid gender.\n"
 	else
-		puts "You have entered an invalid gender."
+		print "You have entered an invalid gender.\n"
 	end
 
-	puts
-	puts "Press y to enter again, any other key to go ahead!"
+	print "Press y to enter again, any other key to go ahead!\n"
 	ch = gets.chomp.upcase
 	break if ch!="Y"
 end
@@ -75,15 +71,12 @@ loop do
 	amount = gets
 
 	if /\A[0-9]+[.]*[0-9]{2}\Z/.match?(amount)
-		puts "You have entered a valid amount."
+		print "You have entered a valid amount.\n"
 	else
-		puts "You have entered an invalid amount."
+		print "You have entered an invalid amount.\n"
 	end
 
-	puts
-	puts "Press y to enter again, any other key to go ahead!"
+	print "Press y to enter again, any other key to go ahead!\n"
 	ch = gets.chomp.upcase
 	break if ch!="Y"
 end
-
-
