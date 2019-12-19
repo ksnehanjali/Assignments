@@ -76,7 +76,8 @@ class CurrentAccount < Account
 	end	
 
 	def calculate_interest(time_in_months)
-		@balance += ( @balance*@rate_of_interest.to_f*time_in_months )/(12*100)
+		interest = 0
+		interest += ( @balance*@rate_of_interest.to_f*time_in_months )/(12*100)
 		puts "\nAmount you get after #{time_in_months} months : #{interest} INR."
 	end	
 	
@@ -85,9 +86,15 @@ end
 
 class SavingAccount < Account	
 
-	@@rate_of_interest = 9.5
+	@@rate_of_interest
+
+	def initialize(account_holder_name, amount)
+		super(account_holder_name, amount)
+		@rate_of_interest = 9.5
+	end	
 
 	def calculate_interest(time_in_months)
+		interest = 0
 		interest += ( @balance*@rate_of_interest*time_in_months.to_i )/(12*100)
 		puts "\nAmount you get after #{time_in_months} months : #{interest} INR."
 	end	
