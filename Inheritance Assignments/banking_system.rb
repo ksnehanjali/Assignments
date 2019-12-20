@@ -23,7 +23,7 @@ class Account
 			return false
 		end		 
 	end
-		
+	
 	def self.validate_name(name)
 		full_name_regex = /\A[a-zA-Z]\s*[a-zA-Z]*\Z/
 		if full_name_regex.match?(name)
@@ -39,7 +39,7 @@ class Account
 		amount = gets.chomp.to_f
 
 		return if !Account.validate_amount(amount)
-			
+		
 		@balance += amount
 		puts "Money deposited successfully!"
 		show_balance
@@ -53,7 +53,7 @@ class Account
 			puts "Sorry..insufficient balance.\n"
 			return
 		end
-			
+		
 		@balance -= amount
 		puts "Money withdrawn successfully!"
 		show_balance
@@ -121,7 +121,6 @@ while true
 		
 		puts "\nPlease select the type of account:\n1. Current Account\n2. Savings Account"
 		account_type = gets.chomp.to_i
-
 		if account_type != 1 and account_type != 2
 			puts "Invalid account type.."
 			break
@@ -135,18 +134,18 @@ while true
 			transaction_choice = gets.chomp.to_i
 
 			case transaction_choice
-				when 1
-					account_obj.deposit
-				when 2
-					account_obj.withdraw
-				when 3
-					puts "\nEnter the number of months: "
-					time_in_months = gets.chomp.to_i
-					account_obj.calculate_interest(time_in_months)	
-				when 4
-					account_obj.show_account_info	 
-				else
-					puts "Invalid choice.."	
+			when 1
+				account_obj.deposit
+			when 2
+				account_obj.withdraw
+			when 3
+				puts "\nEnter the number of months: "
+				time_in_months = gets.chomp.to_i
+				account_obj.calculate_interest(time_in_months)	
+			when 4
+				account_obj.show_account_info	 
+			else
+				puts "Invalid choice.."	
 			end
 
 			puts "\nPress enter to make another transaction or X to exit!"
