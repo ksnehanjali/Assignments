@@ -23,7 +23,7 @@ class Account
 			return false
 		end		 
 	end
-	
+
 	def self.validate_name(name)
 		full_name_regex = /\A[a-zA-Z]\s*[a-zA-Z]*\Z/
 		if full_name_regex.match?(name)
@@ -39,7 +39,7 @@ class Account
 		amount = gets.chomp.to_f
 
 		return if !Account.validate_amount(amount)
-		
+
 		@balance += amount
 		puts "Money deposited successfully!"
 		show_balance
@@ -53,7 +53,7 @@ class Account
 			puts "Sorry..insufficient balance.\n"
 			return
 		end
-		
+
 		@balance -= amount
 		puts "Money withdrawn successfully!"
 		show_balance
@@ -159,4 +159,5 @@ while true
 	end
 	
 	puts "Unable to create account..\n\n"
+	
 end
