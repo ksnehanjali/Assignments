@@ -1,5 +1,5 @@
 class Account
-	
+
 	private
 	@@auto_generate_account_number=0
 	@account_number
@@ -121,6 +121,7 @@ while true
 		
 		puts "\nPlease select the type of account:\n1. Current Account\n2. Savings Account"
 		account_type = gets.chomp.to_i
+
 		if account_type != 1 and account_type != 2
 			puts "Invalid account type.."
 			break
