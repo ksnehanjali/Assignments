@@ -1,4 +1,5 @@
 class Account
+	
 	private
 	@@auto_generate_account_number=0
 	@account_number
