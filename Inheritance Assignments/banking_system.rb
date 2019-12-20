@@ -1,18 +1,17 @@
 class Account
-
+	private
 	@@account_number = 0
 	@account_holder_name
 	@balance
 
 	def initialize(account_holder_name, amount)
-
 		@@account_number += 1
 		@account_holder_name = account_holder_name
 		@balance = amount
 		puts "Account created successfully.."
-	
 	end
 
+	public
 	def self.validate_amount(amount)
 		if amount<=0.0
 			puts "\nPlease enter a valid amount."
@@ -67,7 +66,6 @@ end
 
 
 class CurrentAccount < Account
-
 	@rate_of_interest
 
 	def initialize(account_holder_name, amount)
@@ -80,12 +78,10 @@ class CurrentAccount < Account
 		interest += ( @balance*@rate_of_interest.to_f*time_in_months )/(12*100)
 		puts "\nAmount you get after #{time_in_months} months : #{interest} INR."
 	end	
-	
 end
 
 
 class SavingAccount < Account	
-
 	@@rate_of_interest
 
 	def initialize(account_holder_name, amount)
@@ -98,7 +94,6 @@ class SavingAccount < Account
 		interest += ( @balance*@rate_of_interest*time_in_months.to_i )/(12*100)
 		puts "\nAmount you get after #{time_in_months} months : #{interest} INR."
 	end	
-
 end
 
 while true
@@ -119,16 +114,13 @@ while true
 
 	if account_type == 1
 		account_obj = CurrentAccount.new(account_holder_name, amount)
-
 	elsif account_type == 2
 		account_obj =	SavingAccount.new(account_holder_name, amount)
-
 	else
 		puts "\nInvalid selection.."
 	end		
 
 	while true
-
 		puts "\n1. Deposit\n2. Withdraw\n3. Get Interest Amount\n"
 		puts "Enter you choice of your transaction: "
 		transaction_choice = gets.chomp.to_i
@@ -147,18 +139,9 @@ while true
 		puts "\nPress enter to make another transaction or X to exit!"
 		choice = gets.chomp.upcase
 		break if choice=='X'
-
 	end	
 
 	puts "\nPress enter to create another account or X to exit!"
 	choice = gets.chomp.upcase
 	break if choice=='X'
-
 end
-
-#current_obj1 = CurrentAccount.new(account_holder_name, amount)
-#saving_obj1 = SavingAccount.new("Sayali", 20000.0)
-
-#saving_obj1.show_account_info
-#current_obj1.show_account_info
-#current_obj1.calculate_amount(time_in_months)
