@@ -159,5 +159,4 @@ while true
 	end
 	
 	puts "Unable to create account..\n\n"
-	
 end
