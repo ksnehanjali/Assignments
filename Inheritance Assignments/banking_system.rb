@@ -1,11 +1,13 @@
 class Account
 	private
-	@@account_number = 0
+	@@auto_generate_account_number=0
+	@account_number
 	@account_holder_name
 	@balance
 
 	def initialize(account_holder_name, amount)
-		@@account_number += 1
+		@@auto_generate_account_number += 1
+		@account_number = @@auto_generate_account_number
 		@account_holder_name = account_holder_name
 		@balance = amount
 		puts "Account created successfully.."
@@ -13,19 +15,20 @@ class Account
 
 	public
 	def self.validate_amount(amount)
-		if amount<=0.0
-			puts "\nPlease enter a valid amount."
-			false
+		if amount > 0.0
+			return true
 		else
-			true		
-		end
+			puts "Please enter a valid amount..\n"
+			return false
+		end		 
 	end
 		
 	def self.validate_name(name)
-		if /\A[a-zA-Z]\s*[a-zA-Z]*\z/.match?(name)
+		full_name_regex = /\A[a-zA-Z]\s*[a-zA-Z]*\Z/
+		if full_name_regex.match?(name)
 			return true
 		else
-			puts "Please enter a valid name.\n"
+			puts "Please enter a valid name..\n"
 			return false	
 		end	
 	end
@@ -60,7 +63,7 @@ class Account
 	end	
 
 	def show_account_info
-		puts "\nAccount number:\t#{@@account_number}\nAccount Holder:\t#{@account_holder_name}\nBalance:\t#{@balance}"
+		puts "\nAccount number:\t#{@account_number}\nAccount Holder:\t#{@account_holder_name}\nBalance:\t#{@balance}"
 	end	
 end
 
@@ -96,6 +99,14 @@ class SavingAccount < Account
 	end	
 end
 
+def get_account_obj(account_type, account_holder_name, amount)
+	if account_type == 1
+		return CurrentAccount.new(account_holder_name, amount)
+	else
+		return	SavingAccount.new(account_holder_name, amount)
+	end
+end	
+
 while true
 
 	puts "\nCreating new account-\n"
@@ -105,43 +116,46 @@ while true
 	puts "\nEnter amount: "
 	amount = gets.chomp.to_f
 
-	if !Account.validate_amount(amount) || !Account.validate_name(account_holder_name)
-		next
-	end
+	if Account.validate_name(account_holder_name) and Account.validate_amount(amount)
+		
+		puts "\nPlease select the type of account:\n1. Current Account\n2. Savings Account"
+		account_type = gets.chomp.to_i
+		if account_type != 1 and account_type != 2
+			puts "Invalid account type.."
+			break
+		end	
 
-	puts "\nPlease select the type of account:\n1. Current Account\n2. Savings Account"
-	account_type = gets.chomp.to_i
+		account_obj = get_account_obj(account_type, account_holder_name, amount)
 
-	if account_type == 1
-		account_obj = CurrentAccount.new(account_holder_name, amount)
-	elsif account_type == 2
-		account_obj =	SavingAccount.new(account_holder_name, amount)
-	else
-		puts "\nInvalid selection.."
-	end		
+		while true
+			puts "\n1. Deposit\n2. Withdraw\n3. Get Interest Amount\n4. Show Account Information\n"
+			puts "Enter you choice of your transaction: "
+			transaction_choice = gets.chomp.to_i
 
-	while true
-		puts "\n1. Deposit\n2. Withdraw\n3. Get Interest Amount\n"
-		puts "Enter you choice of your transaction: "
-		transaction_choice = gets.chomp.to_i
+			case transaction_choice
+				when 1
+					account_obj.deposit
+				when 2
+					account_obj.withdraw
+				when 3
+					puts "\nEnter the number of months: "
+					time_in_months = gets.chomp.to_i
+					account_obj.calculate_interest(time_in_months)	
+				when 4
+					account_obj.show_account_info	 
+				else
+					puts "Invalid choice.."	
+			end
 
-		case transaction_choice
-			when 1
-				account_obj.deposit
-			when 2
-				account_obj.withdraw
-			when 3
-				puts "\nEnter the number of months: "
-				time_in_months = gets.chomp.to_i
-				account_obj.calculate_interest(time_in_months)	 
-		end
+			puts "\nPress enter to make another transaction or X to exit!"
+			choice = gets.chomp.upcase
+			break if choice=='X'
+		end	
 
-		puts "\nPress enter to make another transaction or X to exit!"
+		puts "\nPress enter to create another account or X to exit!"
 		choice = gets.chomp.upcase
 		break if choice=='X'
-	end	
-
-	puts "\nPress enter to create another account or X to exit!"
-	choice = gets.chomp.upcase
-	break if choice=='X'
+	end
+	
+	puts "Unable to create account..\n\n"
 end
