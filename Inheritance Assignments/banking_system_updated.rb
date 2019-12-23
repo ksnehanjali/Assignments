@@ -34,7 +34,7 @@ class Account
     end 
   end
 
-  def deposit()
+  def deposit
     puts "\nEnter amount to be deposited: "
     amount = gets.chomp.to_f
 
@@ -45,7 +45,7 @@ class Account
     show_balance
   end 
   
-  def withdraw()
+  def withdraw
     puts "\nEnter amount to be withdrawn: "
     amount = gets.chomp.to_f
 
@@ -68,7 +68,6 @@ class Account
   end 
 end
 
-
 class CurrentAccount < Account
   @rate_of_interest
 
@@ -83,7 +82,6 @@ class CurrentAccount < Account
     puts "\nAmount you get after #{time_in_months} months : #{interest} INR."
   end 
 end
-
 
 class SavingAccount < Account 
   @@rate_of_interest
@@ -102,9 +100,9 @@ end
 
 def get_account_obj(account_type, account_holder_name, amount)
   if account_type == 1
-    return CurrentAccount.new(account_holder_name, amount)
+    CurrentAccount.new(account_holder_name, amount)
   else
-    return  SavingAccount.new(account_holder_name, amount)
+    SavingAccount.new(account_holder_name, amount)
   end
 end 
 
